@@ -4,8 +4,8 @@ USE developers;
 
 CREATE TABLE `users` (
   `id` bigint PRIMARY KEY AUTO_INCREMENT,
-  `username` varchar(20) UNIQUE,
-  `password` varchar(20)
+  `username` varchar(20) UNIQUE NOT NULL,
+  `password` varchar(20) NOT NULL
 );
 
 CREATE TABLE `roles` (
@@ -21,3 +21,5 @@ CREATE TABLE `user_role` (
 ALTER TABLE `user_role` ADD CONSTRAINT `user_role_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `user_role` ADD CONSTRAINT `user_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+INSERT INTO `roles` (`name`) VALUES ('ADMIN'), ('USER');
