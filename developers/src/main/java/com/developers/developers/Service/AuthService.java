@@ -42,6 +42,8 @@ public class AuthService {
     public AuthResponse register(RegisterRequest registerRequest) {
         UserEntity userEntity = UserEntity.builder()
                 .username(registerRequest.getUsername())
+                .lastName(registerRequest.getLastName())
+                .maternalSurname(registerRequest.getMaternalSurname())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                         .authorities(Collections.singletonList(roleRepository.findByName("USER"))).build();
 
