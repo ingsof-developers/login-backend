@@ -8,6 +8,7 @@ import com.developers.developers.model.entity.LoginRequest;
 import com.developers.developers.model.entity.RegisterRequest;
 import com.developers.developers.model.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.sql.exec.spi.StandardEntityInstanceResolver;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -40,11 +41,15 @@ public class AuthService {
     }
 
     public AuthResponse register(RegisterRequest registerRequest) {
+
+        String email = registerRequest.getUsername() + "." + registerRequest.getLast_Name() + registerRequest.getMaternal_Surname() + "@ugto.mx";
+
         UserEntity userEntity = UserEntity.builder()
                 .username(registerRequest.getUsername())
                 .last_Name(registerRequest.getLast_Name())
                 .maternal_Surname(registerRequest.getMaternal_Surname())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
+                .email(email)
                         .authorities(Collections.singletonList(roleRepository.findByName("USER"))).build();
 
         userRepository.save(userEntity);

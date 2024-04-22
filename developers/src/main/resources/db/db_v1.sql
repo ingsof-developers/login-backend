@@ -7,7 +7,8 @@ CREATE TABLE `users` (
     `username` varchar(20) UNIQUE NOT NULL,
     `last_Name` varchar(20) NOT NULL,
     `maternal_Surname` varchar(20) NOT NULL,
-    `password` varchar(255) NOT NULL
+    `password` varchar(255) NOT NULL,
+    `email` varchar(50) UNIQUE NOT NULL
 );
 
 CREATE TABLE `roles` (
