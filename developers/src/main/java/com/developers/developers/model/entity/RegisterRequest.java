@@ -9,5 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RegisterRequest {
     String username;
+    String last_Name;
+    String maternal_Surname;
     String password;
 }
