@@ -42,7 +42,7 @@ public class AuthService {
 
     public AuthResponse register(RegisterRequest registerRequest) {
 
-        String email = registerRequest.getUsername() + "." + registerRequest.getLast_Name() + registerRequest.getMaternal_Surname() + "@ugto.mx";
+        String email = registerRequest.getUsername() + "." + registerRequest.getLastName() + registerRequest.getMaternalSurname() + "@ugto.mx";
 
         UserEntity userEntity = UserEntity.builder()
                 .username(registerRequest.getUsername())
