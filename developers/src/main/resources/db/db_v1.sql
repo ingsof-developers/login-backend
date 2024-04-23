@@ -5,9 +5,10 @@ USE developers;
 CREATE TABLE `users` (
     `id` bigint PRIMARY KEY AUTO_INCREMENT,
     `username` varchar(20) UNIQUE NOT NULL,
-    `password` varchar(255) NOT NULL,
     `last_Name` varchar(20) NOT NULL,
-    `maternal_Surname` varchar(20) NOT NULL
+    `maternal_Surname` varchar(20) NOT NULL,
+    `password` varchar(255) NOT NULL,
+    `email` varchar(50) UNIQUE NOT NULL
 );
 
 CREATE TABLE `roles` (

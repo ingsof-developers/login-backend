@@ -24,6 +24,7 @@ public class UserEntity implements UserDetails {
     private String lastName;
     private String maternalSurname;
     private String password;
+    private String email;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_role",
