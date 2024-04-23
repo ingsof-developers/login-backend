@@ -42,7 +42,7 @@ public class AuthService {
 
     public AuthResponse register(RegisterRequest registerRequest) {
 
-        String email = registerRequest.getUsername() + "." + registerRequest.getLastName() + registerRequest.getMaternalSurname() + "@ugto.mx";
+        String email = UsernameToEmail(registerRequest.getUsername(), registerRequest.getLastName(), registerRequest.getMaternalSurname());
 
         UserEntity userEntity = UserEntity.builder()
                 .username(registerRequest.getUsername())
@@ -57,6 +57,17 @@ public class AuthService {
         return AuthResponse.builder()
                 .token(jwtService.getToken(userEntity))
                 .build();
+    }
+
+    public String UsernameToEmail(String username, String lastName, String maternalSurname) {
+        String[] names = username.split(" ");
+        StringBuilder initials = new StringBuilder();
+
+        for (String name : names) {
+            initials.append(name.charAt(0));
+        }
+
+        return initials.toString().toLowerCase() + "." + lastName.toLowerCase() + maternalSurname.toLowerCase() + "@ugto.mx";
     }
 
 }
