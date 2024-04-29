@@ -21,8 +21,8 @@ public class UserEntity implements UserDetails {
     private Long id;
 
     private String username;
-    private String last_Name;
-    private String maternal_Surname;
+    private String lastName;
+    private String maternalSurname;
     private String password;
     private String email;
 
