@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 
 
-public class students {
+public class Students {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,8 +19,7 @@ public class students {
     private String correo;
     private String telefono;
 
-    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinTable(name = 'users',
-    joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = ))
+    @OneToOne
+    @JoinColumn(name="user_id", unique = true)
+    private UserEntity user;
 }
