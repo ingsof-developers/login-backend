@@ -15,7 +15,6 @@ public class Tutores {
     private long id;
 
     private String name;
-    private String email;
     private String telefono;
 
     // Primera relacion con Tabla departamentos
