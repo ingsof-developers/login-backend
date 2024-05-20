@@ -1,11 +1,16 @@
 package com.developers.developers.Service.Impl;
 
 import com.developers.developers.Repository.CitasRepository;
+
 import com.developers.developers.Service.CitasService;
 import com.developers.developers.model.entity.Citas;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CitasServiceImpl implements CitasService {
 
+    @Autowired
     CitasRepository citasRepository;
 
 

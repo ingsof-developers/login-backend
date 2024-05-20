@@ -11,13 +11,13 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class Students {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-    private String correo;
     private String telefono;
 
     @OneToOne
