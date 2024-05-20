@@ -1,12 +1,10 @@
 package com.developers.developers.Service;
 
 import com.developers.developers.Repository.RoleRepository;
+import com.developers.developers.Repository.StudentRepository;
 import com.developers.developers.Repository.UserRepository;
 import com.developers.developers.jwt.JwtService;
-import com.developers.developers.model.entity.AuthResponse;
-import com.developers.developers.model.entity.LoginRequest;
-import com.developers.developers.model.entity.RegisterRequest;
-import com.developers.developers.model.entity.UserEntity;
+import com.developers.developers.model.entity.*;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.sql.exec.spi.StandardEntityInstanceResolver;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,11 +21,9 @@ import java.util.Collections;
 public class AuthService {
 
     private final UserRepository userRepository;
-
     private final RoleRepository roleRepository;
-
+    private final StudentRepository studentRepository;
     private final JwtService jwtService;
-
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
@@ -41,21 +37,34 @@ public class AuthService {
     }
 
     public AuthResponse register(RegisterRequest registerRequest) {
-
         String email = UsernameToEmail(registerRequest.getUsername(), registerRequest.getLastName(), registerRequest.getMaternalSurname());
+        String fullName = registerRequest.getUsername() + " " + registerRequest.getLastName() + " " + registerRequest.getMaternalSurname();
 
+        // Create the UserEntity
         UserEntity userEntity = UserEntity.builder()
                 .username(registerRequest.getUsername())
                 .lastName(registerRequest.getLastName())
                 .maternalSurname(registerRequest.getMaternalSurname())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .email(email)
-                        .authorities(Collections.singletonList(roleRepository.findByName("USER"))).build();
+                .authorities(Collections.singletonList(roleRepository.findByName("USER"))).build();
 
-        userRepository.save(userEntity);
+        // Save the UserEntity first
+        UserEntity savedUserEntity = userRepository.save(userEntity);
 
+        // Create and save the Students entity
+        Students student = Students.builder()
+                .name(fullName)
+                .correo(email)
+                .telefono("0000000000")
+                .user(savedUserEntity)
+                .build();
+
+        Students savedStudent = studentRepository.save(student);
+
+        // Return the token
         return AuthResponse.builder()
-                .token(jwtService.getToken(userEntity))
+                .token(jwtService.getToken(savedUserEntity))
                 .build();
     }
 
@@ -69,5 +78,4 @@ public class AuthService {
 
         return initials.toString().toLowerCase() + "." + lastName.toLowerCase() + maternalSurname.toLowerCase() + "@ugto.mx";
     }
-
 }

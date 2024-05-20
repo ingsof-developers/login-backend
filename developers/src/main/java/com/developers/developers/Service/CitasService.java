@@ -1,6 +1,7 @@
 package com.developers.developers.Service;
 
 import com.developers.developers.Repository.CitasRepository;
+import com.developers.developers.model.entity.Citas;
 
 public interface CitasService {
 

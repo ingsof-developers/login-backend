@@ -1,8 +1,10 @@
-package com.developers.developers.Service;
+package com.developers.developers.Service.Impl;
 
 import com.developers.developers.Repository.CitasRepository;
+import com.developers.developers.Service.CitasService;
+import com.developers.developers.model.entity.Citas;
 
-public class CitasServiceImpl implements CitasService{
+public class CitasServiceImpl implements CitasService {
 
     CitasRepository citasRepository;
 

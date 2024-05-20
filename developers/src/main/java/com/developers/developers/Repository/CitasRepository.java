@@ -1,4 +1,7 @@
 package com.developers.developers.Repository;
 
-public interface CitasRepository extends JpaRepository<Citas, Long>{
+import com.developers.developers.model.entity.Citas;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CitasRepository extends JpaRepository<Citas, Long> {
 }

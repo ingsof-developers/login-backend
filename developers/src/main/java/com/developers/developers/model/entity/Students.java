@@ -1,15 +1,16 @@
 package com.developers.developers.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "students")
 @Getter
 @Setter
-
-
+@Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Students {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
