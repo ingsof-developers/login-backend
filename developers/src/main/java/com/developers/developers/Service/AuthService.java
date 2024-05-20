@@ -55,8 +55,8 @@ public class AuthService {
         // Create and save the Students entity
         Students student = Students.builder()
                 .name(fullName)
-                .correo(email)
                 .telefono("0000000000")
+                .correo(email)
                 .user(savedUserEntity)
                 .build();
 

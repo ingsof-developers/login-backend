@@ -19,6 +19,7 @@ public class Students {
 
     private String name;
     private String telefono;
+    private String correo;
 
     @OneToOne
     @JoinColumn(name="user_id", unique = true)
