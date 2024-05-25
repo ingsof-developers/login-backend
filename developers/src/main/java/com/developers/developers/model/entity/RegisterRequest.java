@@ -12,4 +12,5 @@ public class RegisterRequest {
     String password;
     String lastName;
     String maternalSurname;
+    String telefono;
 }
