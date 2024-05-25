@@ -6,14 +6,13 @@ import com.developers.developers.Repository.UserRepository;
 import com.developers.developers.jwt.JwtService;
 import com.developers.developers.model.entity.*;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.sql.exec.spi.StandardEntityInstanceResolver;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.text.Normalizer;
 import java.util.Collections;
 
 @Service
@@ -28,8 +27,8 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
     public AuthResponse login(LoginRequest request) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-        UserDetails user = userRepository.findByUsername(request.getUsername()).orElseThrow();
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+        UserDetails user = userRepository.findByEmail(request.getEmail()).orElseThrow();
         String token = jwtService.getToken(user);
         return AuthResponse.builder()
                 .token(token)
@@ -55,7 +54,7 @@ public class AuthService {
         // Create and save the Students entity
         Students student = Students.builder()
                 .name(fullName)
-                .telefono("0000000000")
+                .telefono(registerRequest.getTelefono())
                 .correo(email)
                 .user(savedUserEntity)
                 .build();
@@ -69,6 +68,7 @@ public class AuthService {
     }
 
     public String UsernameToEmail(String username, String lastName, String maternalSurname) {
+        username = removeAccents(username);
         String[] names = username.split(" ");
         StringBuilder initials = new StringBuilder();
 
@@ -76,6 +76,14 @@ public class AuthService {
             initials.append(name.charAt(0));
         }
 
+        lastName = removeAccents(lastName);
+        maternalSurname = removeAccents(maternalSurname);
+
         return initials.toString().toLowerCase() + "." + lastName.toLowerCase() + maternalSurname.toLowerCase() + "@ugto.mx";
+    }
+
+    private String removeAccents(String text) {
+        return Normalizer.normalize(text, Normalizer.Form.NFD)
+                .replaceAll("[^\\p{ASCII}]", "");
     }
 }
