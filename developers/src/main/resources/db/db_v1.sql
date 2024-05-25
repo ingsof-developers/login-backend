@@ -54,6 +54,7 @@ CREATE TABLE `citas` (
                          `id` bigint PRIMARY KEY AUTO_INCREMENT,
                          `fecha` date,
                          `hora` time,
+                            `descripcion` longtext,
                          `student_id` bigint,
                          `tutor_id` bigint,
                          `departamento_id` bigint,

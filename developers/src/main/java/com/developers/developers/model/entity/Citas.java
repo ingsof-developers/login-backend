@@ -19,6 +19,7 @@ public class Citas {
 
     private Date fecha;
     private Time hora;
+    private String descripcion;
 
     @ManyToOne
     @JoinColumn(name = "student_id")
