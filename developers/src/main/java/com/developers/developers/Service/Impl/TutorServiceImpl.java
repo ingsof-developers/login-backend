@@ -1,6 +1,7 @@
-package com.developers.developers.Service;
+package com.developers.developers.Service.Impl;
 
 import com.developers.developers.Repository.TutorRepository;
+import com.developers.developers.Service.TutorService;
 import com.developers.developers.model.entity.Tutores;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TutorServiceImpl implements TutorService{
+public class TutorServiceImpl implements TutorService {
 
     @Autowired
     TutorRepository tutorRepository;

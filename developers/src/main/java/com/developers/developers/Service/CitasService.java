@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public interface CitasService {
 
 
-    Citas save(Citas citas);
+    Citas save(Citas citas) throws Exception;
 
     <Optional> Citas findById(Long id);
 
