@@ -1,5 +1,7 @@
 package com.developers.developers.Service;
 
+import com.developers.developers.model.entity.AuthResponse;
+import com.developers.developers.model.entity.TutorRegisterRequest;
 import com.developers.developers.model.entity.Tutores;
 import org.springframework.stereotype.Service;
 
@@ -11,5 +13,5 @@ public interface TutorService {
     <Optional> Tutores findById(Long id);
     List<Tutores> findAll();
 
-    Tutores save(Tutores tutores);
+    AuthResponse save(TutorRegisterRequest tutorRegisterRequest);
 }

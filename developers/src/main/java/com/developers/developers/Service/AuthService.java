@@ -46,7 +46,7 @@ public class AuthService {
                 .maternalSurname(registerRequest.getMaternalSurname())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .email(email)
-                .authorities(Collections.singletonList(roleRepository.findByName("USER"))).build();
+                .authorities(Collections.singletonList(roleRepository.findByName("ROLE_STUDENT"))).build();
 
         // Save the UserEntity first
         UserEntity savedUserEntity = userRepository.save(userEntity);
