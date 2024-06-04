@@ -21,4 +21,9 @@ public class CitasController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> getAll() {
+        return ResponseEntity.ok().body(citasService.findAll());
+    }
 }

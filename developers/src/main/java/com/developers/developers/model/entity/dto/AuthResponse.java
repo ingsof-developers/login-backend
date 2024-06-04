@@ -1,4 +1,4 @@
-package com.developers.developers.model.entity;
+package com.developers.developers.model.entity.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

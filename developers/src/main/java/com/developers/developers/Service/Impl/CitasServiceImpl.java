@@ -7,8 +7,12 @@ import com.developers.developers.Repository.StudentRepository;
 import com.developers.developers.Repository.TutorRepository;
 import com.developers.developers.Service.CitasService;
 import com.developers.developers.model.entity.Citas;
+import com.developers.developers.model.entity.dto.CitasDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CitasServiceImpl implements CitasService {
@@ -24,8 +28,26 @@ public class CitasServiceImpl implements CitasService {
 
 
     @Override
-    public <Optional> Citas findById(Long id) {
-        return citasRepository.findById(id).orElse(null);
+    public List<CitasDTO> findAll() {
+        List<Citas> citas = citasRepository.findAll();
+        return citas.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    private CitasDTO convertToDTO(Citas cita) {
+        CitasDTO dto = new CitasDTO();
+        dto.setId(cita.getId());
+        dto.setFecha(cita.getFecha());
+        dto.setHora(cita.getHora());
+        dto.setDescripcion(cita.getDescripcion());
+        dto.setStudentId(cita.getStudents().getId());
+        dto.setTutorId(cita.getTutores().getId());
+        dto.setTutorName(cita.getTutores().getName());
+        dto.setDepartamentoId(cita.getDepartamentos().getId());
+        dto.setDepartamentoName(cita.getDepartamentos().getName());
+
+        return dto;
     }
 
 
@@ -45,7 +67,10 @@ public class CitasServiceImpl implements CitasService {
         return citasRepository.save(citas);
     }
 
-
+    @Override
+    public <Optional> Citas findById(Long id) {
+        return null;
+    }
 
 
 }

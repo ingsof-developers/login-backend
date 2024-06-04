@@ -113,7 +113,9 @@ VALUES ('ROLE_ADMIN'),
        ('ROLE_STUDENT');
 
 INSERT INTO users (username, last_Name, maternal_Surname, password, email)
-VALUES ('Juan', 'Perez', 'Perez', '$2a$10$OcywHwvNHIqru6BG2IyiTee3yA73vy.KcyfAHnHq16gaao9SIF4A6', 'j.perezperez@ugto,mx');
+VALUES ('Juan', 'Perez', 'Perez', '$2a$10$OcywHwvNHIqru6BG2IyiTee3yA73vy.KcyfAHnHq16gaao9SIF4A6', 'j.perezperez@ugto.mx');
+INSERT INTO user_role (role_id, user_id)
+VALUES (3, 1);
 INSERT INTO tutores (name, correo, telefono, departamento_id, user_id)
 VALUES ('Juan Perez Perez', 'j.perezperez@ugto.mx', '4621234567', 1, 1);
 

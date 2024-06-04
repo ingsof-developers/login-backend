@@ -5,6 +5,9 @@ import com.developers.developers.Repository.StudentRepository;
 import com.developers.developers.Repository.UserRepository;
 import com.developers.developers.jwt.JwtService;
 import com.developers.developers.model.entity.*;
+import com.developers.developers.model.entity.dto.AuthResponse;
+import com.developers.developers.model.entity.dto.LoginRequest;
+import com.developers.developers.model.entity.dto.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,6 +41,9 @@ public class AuthService {
     public AuthResponse register(RegisterRequest registerRequest) {
         String email = UsernameToEmail(registerRequest.getUsername(), registerRequest.getLastName(), registerRequest.getMaternalSurname());
         String fullName = registerRequest.getUsername() + " " + registerRequest.getLastName() + " " + registerRequest.getMaternalSurname();
+        String telefono = "+521"+registerRequest.getTelefono();
+        String from = "+14155238886";
+        String message = "Hola," + fullName + ". Su correo para iniciar sesion en gecia de la ug es: " + email;
 
         // Create the UserEntity
         UserEntity userEntity = UserEntity.builder()
@@ -59,7 +65,10 @@ public class AuthService {
                 .user(savedUserEntity)
                 .build();
 
+
         Students savedStudent = studentRepository.save(student);
+
+        TwilioService.sendMessage(telefono, message);
 
         // Return the token
         return AuthResponse.builder()
@@ -77,7 +86,9 @@ public class AuthService {
         }
 
         lastName = removeAccents(lastName);
+        lastName.split(" ");
         maternalSurname = removeAccents(maternalSurname);
+        maternalSurname.split(" ");
 
         return initials.toString().toLowerCase() + "." + lastName.toLowerCase() + maternalSurname.toLowerCase() + "@ugto.mx";
     }

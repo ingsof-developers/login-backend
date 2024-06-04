@@ -1,5 +1,6 @@
-package com.developers.developers.model.entity;
+package com.developers.developers.model.entity.dto;
 
+import com.developers.developers.model.entity.Departamentos;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

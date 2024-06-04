@@ -5,8 +5,8 @@ import com.developers.developers.Repository.TutorRepository;
 import com.developers.developers.Repository.UserRepository;
 import com.developers.developers.Service.TutorService;
 import com.developers.developers.jwt.JwtService;
-import com.developers.developers.model.entity.AuthResponse;
-import com.developers.developers.model.entity.TutorRegisterRequest;
+import com.developers.developers.model.entity.dto.AuthResponse;
+import com.developers.developers.model.entity.dto.TutorRegisterRequest;
 import com.developers.developers.model.entity.Tutores;
 import com.developers.developers.model.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,7 +78,9 @@ public class TutorServiceImpl implements TutorService {
         }
 
         lastName = removeAccents(lastName);
+        lastName.split(" ");
         maternalSurname = removeAccents(maternalSurname);
+        maternalSurname.split(" ");
 
         return initials.toString().toLowerCase() + "." + lastName.toLowerCase() + maternalSurname.toLowerCase() + "@ugto.mx";
     }

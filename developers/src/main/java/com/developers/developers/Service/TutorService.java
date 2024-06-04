@@ -1,7 +1,7 @@
 package com.developers.developers.Service;
 
-import com.developers.developers.model.entity.AuthResponse;
-import com.developers.developers.model.entity.TutorRegisterRequest;
+import com.developers.developers.model.entity.dto.AuthResponse;
+import com.developers.developers.model.entity.dto.TutorRegisterRequest;
 import com.developers.developers.model.entity.Tutores;
 import org.springframework.stereotype.Service;
 
