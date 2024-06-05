@@ -23,4 +23,5 @@ public class CitasDTO {
     private String tutorName;
     private Long departamentoId;
     private String departamentoName;
+    private Boolean Active;
 }

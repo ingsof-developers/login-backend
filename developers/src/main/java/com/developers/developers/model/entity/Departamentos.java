@@ -2,13 +2,17 @@ package com.developers.developers.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "departamentos")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Departamentos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,5 +33,9 @@ public class Departamentos {
     @OneToMany(mappedBy = "departamento", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Service> services;
+
+    public Departamentos(Long id) {
+        this.id = id;
+    }
 
 }

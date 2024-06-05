@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface TutorRepository extends JpaRepository<Tutores, Long> {
     Optional<Tutores> findById(long id);
+
+    Optional<Object> findByCorreo(String email);
 }

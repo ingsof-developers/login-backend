@@ -19,4 +19,20 @@ public interface CitasService {
 
     List<CitasDTO> findAll();
 
+    void deleteById(Long id);
+
+    void deleteAll();
+    Citas update(Citas citas) throws Exception;
+
+    List<CitasDTO> findByTutorId(String email);
+
+    List<CitasDTO> findByStudentId(String email);
+
+    List<CitasDTO> findByTutorIdAndActiveTrue(String email);
+
+    List<CitasDTO> findByStudentIdAndActiveTrue(String email);
+
+    void deactivate(Long id);
+
+    void activate(Long id);
 }

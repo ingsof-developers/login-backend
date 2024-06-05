@@ -1,18 +1,22 @@
 package com.developers.developers.jwt;
 
+import com.developers.developers.model.entity.UserEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class JwtService {
@@ -20,7 +24,25 @@ public class JwtService {
     private static final String SECRET_KEY = "586E3272357538782F413F4428472B4B6250655368566B597033733676397924";
 
     public String getToken(UserDetails userDetails) {
-        return getToken(new HashMap<>(), userDetails);
+    Map<String, Object> claims = new HashMap<>();
+        Collection<? extends GrantedAuthority> roles = userDetails.getAuthorities();
+
+        if (roles != null) {
+            claims.put("roles", roles.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
+        }
+        if (userDetails instanceof UserEntity) {
+            UserEntity user = (UserEntity) userDetails;
+            claims.put("fullName", user.getName() + " " + user.getLastName() + " " + user.getMaternalSurname());
+            claims.put("email", user.getEmail());
+        }
+
+        return Jwts.builder()
+            .setClaims(claims)
+            .setSubject(userDetails.getUsername())
+            .setIssuedAt(new Date(System.currentTimeMillis()))
+            .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+            .signWith(getKey(), SignatureAlgorithm.HS256)
+            .compact();
     }
 
     private String getToken(Map<String, Object> extraClaims, UserDetails userDetails) {

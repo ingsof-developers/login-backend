@@ -60,6 +60,7 @@ CREATE TABLE `citas` (
                          `student_id` bigint,
                          `tutor_id` bigint,
                          `departamento_id` bigint,
+                        `active` BOOLEAN,
                          CONSTRAINT `citas_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
                          CONSTRAINT `citas_tutor_id_foreign` FOREIGN KEY (`tutor_id`) REFERENCES `tutores` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
                          CONSTRAINT `citas_departamento_id_foreign` FOREIGN KEY (`departamento_id`) REFERENCES `departamentos` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
@@ -113,9 +114,13 @@ VALUES ('ROLE_ADMIN'),
        ('ROLE_STUDENT');
 
 INSERT INTO users (username, last_Name, maternal_Surname, password, email)
-VALUES ('Juan', 'Perez', 'Perez', '$2a$10$OcywHwvNHIqru6BG2IyiTee3yA73vy.KcyfAHnHq16gaao9SIF4A6', 'j.perezperez@ugto.mx');
+VALUES ('Juan', 'Perez', 'Perez', '$2a$10$cB9qf5EaGmwgtC/bS5GViegnQRlpxi44sMp4bLJ5WlA2QGGTbOXoa', 'j.perezperez@ugto.mx'),
+('Maria', 'Gonzalez', 'Gonzalez', '$2a$10$cB9qf5EaGmwgtC/bS5GViegnQRlpxi44sMp4bLJ5WlA2QGGTbOXoa', 'm.gonzalezgonzalez@ugto.mx');
 INSERT INTO user_role (role_id, user_id)
-VALUES (3, 1);
+VALUES (3, 1),
+(1, 2);
 INSERT INTO tutores (name, correo, telefono, departamento_id, user_id)
 VALUES ('Juan Perez Perez', 'j.perezperez@ugto.mx', '4621234567', 1, 1);
+
+
 

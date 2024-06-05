@@ -24,4 +24,6 @@ public class Students {
     @OneToOne
     @JoinColumn(name="user_id", unique = true)
     private UserEntity user;
+
+
 }
